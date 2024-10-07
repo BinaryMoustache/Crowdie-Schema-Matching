@@ -55,14 +55,20 @@ async def create_task(
 
 @router.get("/mytasks/")
 async def get_user_tasks(db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
-    result = await db.execute(
-        select(Task).where(Task.user_id == current_user.id)
-    )
-    tasks = result.scalars().all()
-    if not tasks:
+    try:
+        result = await db.execute(
+            select(Task).where(Task.user_id == current_user.id)
+        )
+        tasks = result.scalars().all()
+
+        return tasks
+
+    except Exception as e:
+
         raise HTTPException(
-            status_code=404, detail="No tasks found for this user.")
-    return tasks
+            status_code=500,
+            detail=f"An error occurred while fetching tasks: {str(e)}"
+        )
 
 
 @router.get("/crowd_tasks/")
@@ -147,7 +153,7 @@ async def get_microtask(
         ~MicroTask.users_ids.contains(str(current_user.id))
     ))
 
-    microtask = microtask_result.scalar_one_or_none()
+    microtask = microtask_result.scalars().first()
 
     if not microtask:
         return {"message": "You have completed all available microtasks."}
