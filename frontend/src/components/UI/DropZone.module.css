@@ -1,0 +1,56 @@
+.dropZone {
+  width: 30rem;
+  height: 12rem;
+  border: 2px dashed #2C3E50;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  overflow-y: auto;
+  
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+}
+
+.uploadLabel {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #34495E;
+  margin-bottom: 10px;
+}
+
+.dropZone:hover {
+  background-color: whitesmoke;
+  border-color: #3498db;
+  border: 2px solid #3498db;
+}
+
+.icon {
+  margin-top: 0; 
+}
+
+.fileList {
+  padding-left: 20px;
+  list-style-type: decimal;
+  color: #34495E;
+  font-weight: 500;
+  width: 100%;
+  overflow-y: auto;
+
+}
+
+.fileList li {
+  margin: 5px 0;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: whitesmoke;
+
+}
+

@@ -1,0 +1,22 @@
+.modal {
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  animation: fade-slide-up 0.3s ease-out forwards;
+  font-family:"Inter";
+  font-size: 16px; 
+  letter-spacing: -0.015em; 
+  line-height: 1.6;
+  background-color: rgba(236, 242, 246, 0.92);
+  color: #2C3E50;
+
+}
+
+.modal h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
+}

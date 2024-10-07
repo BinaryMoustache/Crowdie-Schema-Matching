@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.infoContainer {
+  width: 35%;
+  text-align: left;
+  top: 0;
+  padding: 10px;
+  position: sticky;
+}
+
+.gridContainer {
+  width: 55%;
+}
+
+.header {
+  font-size: 1.7rem;
+  margin-bottom: 2rem;
+}
+
+.description {
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.instructionsHeader {
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.instructionsList {
+  margin-left: 1rem;
+  line-height: 1.6;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}

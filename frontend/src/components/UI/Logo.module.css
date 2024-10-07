@@ -1,0 +1,20 @@
+.container {
+  text-align: left;
+  
+  }
+  
+  .logo {
+    font-size: 2rem;
+    font-weight: 700;
+  
+    color: #2C3E50;
+    margin: 0; 
+  }
+  
+  .subtitle {
+    color: #7F8C8D ;
+    font-size: 0.6rem;
+    font-weight: 500;
+    margin: 0; 
+    margin-left: 4px;
+  }

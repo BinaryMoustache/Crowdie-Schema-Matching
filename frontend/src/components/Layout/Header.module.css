@@ -1,0 +1,54 @@
+.header {
+  width: 100%;
+  height: 5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #2C3E50;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+
+}
+
+.container {
+  width: 90%;
+  height: 100%;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+}
+
+.bars {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+
+.bars:hover {
+  background-color: #3498DB;
+  color: whitesmoke;
+  border-radius: 70%;
+  padding: 0.3rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+}
+
+
+
+.logoutbutton {
+  background-color: #2C3E50;
+  color: #ECF0F1;
+}
+
+.logoutbutton:hover {
+  background-color: #3498DB;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}

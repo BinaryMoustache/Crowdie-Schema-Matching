@@ -1,0 +1,104 @@
+.container {
+    width: inherit;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #2C3E50;
+}
+
+.actions {
+    height: 2rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+hr {
+    margin: 5px 0;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+
+}
+
+.message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px
+}
+
+.taskList {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+}
+
+.taskItem {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 5px 5px;
+    border-bottom: 1px solid #2C3E50;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.taskItem:hover {
+    background-color: #ECF2F6;
+    transform: translateY(-1px);
+}
+
+.checkbox {
+    margin-right: 15px;
+}
+
+.expandIcon {
+    cursor: pointer;
+}
+
+.taskHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    width: 100%;
+
+}
+
+.taskName {
+   
+    display: flex;
+    align-items: center;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.taskStatus {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+
+}
+
+.expandIcon {
+    cursor: pointer;
+}
+
+.taskDetails {
+    padding: 10px;
+    border-left: 3px solid #ccc;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

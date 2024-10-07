@@ -1,0 +1,69 @@
+.gridContainer {
+  padding: 10px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cardContainer {
+  background-color: rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.cardContainer:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.actions {
+  width: 100%;
+}
+
+.claimButton {
+  width: 100%;
+  background-color: #2C3E50;
+  color: #ECF0F1;
+}
+
+.claimButton:hover {
+  background-color: #3498DB;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.child {
+  border-bottom: 1px solid lightgray;
+
+}
+
+.errorText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  width: 100%;
+  text-align: center;
+  color: #E74C3C;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+
+.noTasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  padding: 10px;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.2rem;
+
+}
+
+.noTasks p {
+  margin: 0;
+}

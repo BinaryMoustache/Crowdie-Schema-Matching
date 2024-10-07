@@ -1,0 +1,62 @@
+.container {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.question {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.dataContainer {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.tableContainer {
+    width: 45%;
+    min-width: 300px;
+}
+
+table {
+    width: 100%;
+    /* Ensure tables take full width of their container */
+    border-collapse: collapse;
+    /* Remove space between table cells */
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+thead {
+    background-color: #f2f2f2;
+    /* Add background color to header */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the buttons */
+    gap: 15px;
+    /* Space between the buttons */
+    margin-top: 20px;
+}

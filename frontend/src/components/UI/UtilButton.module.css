@@ -1,0 +1,28 @@
+.createbutton {
+    width: 6rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2C3E50;
+    background-color: transparent;
+    border: none;
+    
+    padding: 5px; 
+    box-sizing: border-box; 
+}
+
+.createbutton:hover {
+    cursor: pointer;
+    background-color: #ECF2F6;
+}
+
+.createbutton:disabled {
+    background-color: transparent;
+    cursor:default;
+    opacity: 0.6;
+  }

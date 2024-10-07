@@ -1,0 +1,14 @@
+.container{
+    width: 95vw;
+    margin: 0 auto;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.header {
+    font-size: 25px; 
+    font-weight: 700;
+   
+
+   
+  }

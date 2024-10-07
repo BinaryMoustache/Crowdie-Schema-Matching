@@ -6,23 +6,24 @@ from contextlib import asynccontextmanager
 from database.database import engine, Base
 import uvicorn
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Creating tables...")
-    Base.metadata.create_all(bind=engine)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     print("Tables created successfully.")
-    yield  
+    yield
     print("Shutting down...")
-    engine.dispose()  
+    await engine.dispose()
     print("Cleanup tasks completed.")
-
 
 
 app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
