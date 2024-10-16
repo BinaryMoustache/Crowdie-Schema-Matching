@@ -2,7 +2,6 @@
   width: 40%;
   padding: 2rem;
   margin: 0 auto;
-
 }
 
 .inputs {
@@ -43,4 +42,25 @@
   margin-top: -1rem;
   color: red;
   font-size: 0.9rem;
+}
+
+
+@media (max-width: 1200px) {
+  .signinbutton {
+    font-size: 0.65rem;
+  }
+
+  .textbutton {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 80%;
+  }
+
+  .signinbutton {
+    font-size: 0.6rem;
+  }
 }

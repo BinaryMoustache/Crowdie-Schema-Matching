@@ -145,12 +145,14 @@ async def process_tables(
         try:
             async with db.begin():
                 db.add_all(microtasks_to_add)
+                print("Microtasks added successfully")
 
                 task = await get_task_by_id(db, task_id=task_id)
                 if task:
                     task.status = "active"
                     task.num_microtasks = len(microtasks_to_add)
                     await db.commit()
+                    print("Task status updated to 'active'.")
         except Exception as e:
             print(f"Error while adding microtasks: {e}")
         finally:

@@ -18,6 +18,7 @@ function InputText(props) {
         min={props.min}
         max={props.max} 
         step={props.step}
+        autoComplete={props.autocomplete || "off"}
       />
     </div>
   );

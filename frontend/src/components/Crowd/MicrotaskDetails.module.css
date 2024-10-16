@@ -1,62 +1,196 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 100%;
     margin: 20px auto;
+    background-color: rgba(255, 255, 255, 0.6);
+    height: 95%;
+    overflow-y: auto;
+    text-align: center;
+    scrollbar-width: thin;
+}
+
+.header {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
 }
 
 .question {
-    font-size: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
     margin-bottom: 20px;
 }
 
 .dataContainer {
-    padding: 10px;
+    width: 100%;
+    padding: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    gap: 2rem;
+    gap: 5rem;
     flex-wrap: wrap;
 }
 
 .tableContainer {
-    width: 45%;
+ 
     min-width: 300px;
+  
+
 }
 
-table {
+.tableContainer table {
     width: 100%;
-    /* Ensure tables take full width of their container */
+    height: 30%;
     border-collapse: collapse;
-    /* Remove space between table cells */
 }
 
-th,
+.tableContainer th,
 td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #2C3E50;
     text-align: left;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    text-align: center;
+
 }
 
-thead {
-    background-color: #f2f2f2;
-    /* Add background color to header */
+.tableContainer td {
+    text-align: left;
 }
 
-tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
+.tableContainer thead {
+    background-color: #2C3E50;
+    color: #ECF2F6;
+
 }
 
-tbody tr:hover {
-    background-color: #f1f1f1;
+.tableContainer tbody td {
+    text-align: center; 
+    
+  }
+.tableContainer tbody tr:nth-child(odd) {
+    background-color: #ECF2F6;
+
 }
 
+tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.tableContainer tbody tr:hover {
+    background-color: #DCE3E7;
+}
 
 .actions {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    /* Center the buttons */
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     gap: 15px;
-    /* Space between the buttons */
-    margin-top: 20px;
+   
+
+
+}
+
+.yesButton,
+.noButton,
+.skipButton {
+    font-size: 0.65rem;
+    font-weight: 700;
+    width: 20%;
+}
+
+.yesButton:hover {
+    background-color: #27AE60;
+}
+
+
+.noButton:hover {
+    background-color: #E74C3C;
+}
+
+.skipButton:hover {
+    background-color: #95A5A6;
+}
+
+.tableName {
+    font-size: 0.9rem;
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    .dataContainer {
+        flex-direction: column; 
+        gap: 2rem; 
+    }
+
+    .tableContainer {
+        width: 100%; 
+        margin-bottom: 1rem; 
+    }
+
+    .yesButton,
+    .noButton,
+    .skipButton {
+        width: 80%; 
+        font-size: 0.75rem; 
+    }
+
+    .header {
+        font-size: 1.2rem; 
+    }
+
+    .question {
+        font-size: 0.75rem; 
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1300px) {
+    .dataContainer {
+        gap: 2rem; 
+    }
+
+    .tableContainer {
+        width: 35%;
+    }
+
+    .yesButton,
+    .noButton,
+    .skipButton {
+        width: 30%; 
+    }
+
+    .header {
+        font-size: 1.2rem; 
+    }
+
+    .question {
+        font-size: 0.75rem; 
+    }
+    .tableName {
+        font-size: 0.75rem;
+    }
+}
+
+
+@media (min-width: 1300px) {
+    .dataContainer {
+        gap: 5rem; 
+    }
+
+    .tableContainer {
+        width: 35%;
+    }
+
+    .yesButton,
+    .noButton,
+    .skipButton {
+        width: 20%; 
+    }
 }

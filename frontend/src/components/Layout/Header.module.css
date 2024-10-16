@@ -9,7 +9,6 @@
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-
 }
 
 .container {
@@ -19,7 +18,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-
 }
 
 .bars {
@@ -30,18 +28,13 @@
   cursor: pointer;
 }
 
-
-
 .bars:hover {
   background-color: #3498DB;
   color: whitesmoke;
   border-radius: 70%;
   padding: 0.3rem;
   transition: background-color 0.3s ease, color 0.3s ease;
-
 }
-
-
 
 .logoutbutton {
   background-color: #2C3E50;
@@ -52,3 +45,5 @@
   background-color: #3498DB;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.link{text-decoration: none;}

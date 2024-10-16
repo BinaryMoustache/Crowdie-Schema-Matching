@@ -2,9 +2,10 @@
   height: 100vh;
   position: fixed;
   top: 0;
-  left: -250px;
-  width: 250px;
-  background-color: #2C3E50;;
+  left: -320px;
+  width: 320px;
+  background-color: #2C3E50;
+  ;
   padding-top: 0;
   transition: transform 0.3s ease, left 0.3s ease;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -44,21 +45,25 @@
 
 .second_container {
 
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-top: 1rem;
 }
 
 .sidebar a {
   padding: 15px 20px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: white;
+  color: whitesmoke;
   display: block;
   transition: background-color 0.3s ease;
 }
 
-.sidebar a:hover {
-  background-color: #3498DB;
+.sidebar a:hover,
+.linkactive {
+  background-color: #466787;
 }

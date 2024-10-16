@@ -1,6 +1,8 @@
+import Main from "../components/Main/Main";
+
 function MainPage(){
 
-    return <p>Welcome to the main page</p>
+    return <Main />
 }
 
 export default MainPage;

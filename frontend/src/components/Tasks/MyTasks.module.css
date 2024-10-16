@@ -1,0 +1,18 @@
+.container {
+    width: 95vw;
+    margin: 0 auto;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.header {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 10rem;
+}

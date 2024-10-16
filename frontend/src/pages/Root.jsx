@@ -1,12 +1,15 @@
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+
 import Header from "../components/Layout/Header";
 import SideBar from "../components/Layout/Sidebar";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 function RootLayout() {
   const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
+
+  const sidebarRef = useRef(null);
 
   const showSidebarHandler = () => {
     setShowSidebar(true);
@@ -18,27 +21,37 @@ function RootLayout() {
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
-    
-    return navigate("/auth");
+    navigate("/auth");
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        showSidebar &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target)
+      ) {
+        hideSideBarHandler();
+      }
+    };
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (showSidebar && !event.target.closest('.sidebar')) {
-      hideSideBarHandler();
-    }
-  };
+    document.addEventListener("mousedown", handleClickOutside);
 
-  document.addEventListener('mousedown', handleClickOutside);
-  return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-  };
-}, [showSidebar]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSidebar]);
+
   return (
     <>
-      <Header onClick={showSidebarHandler} onLogout={logoutHandler}/>
-    <SideBar active={showSidebar} onClick={hideSideBarHandler} />
+      <Header onClick={showSidebarHandler} onLogout={logoutHandler} />
+
+      <SideBar
+        ref={sidebarRef}
+        active={showSidebar}
+        onClick={hideSideBarHandler}
+      />
+
       <main>
         <Outlet />
       </main>

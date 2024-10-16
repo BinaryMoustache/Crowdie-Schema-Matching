@@ -13,9 +13,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-size: 16px;
-  letter-spacing: -0.015em;
-  line-height: 1.6;
+  font-size: 16px; 
+  letter-spacing: -0.015em; 
+  line-height: 1.6; 
 }
 
 
@@ -29,27 +29,24 @@ body {
 
 main {
   margin-top: 5rem;
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 5rem); 
   overflow-y: auto;
-
+  color: #2C3E50;
   font-family: "Inter";
   font-weight: 400;
-  font-size: 18px;
+  font-size: 18px; 
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+p {
+  color: #3F484A;
+}
 
 
-html,
-body {
+html, body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
@@ -58,6 +55,7 @@ body {
 
 @media (min-width: 768px) {
   :root {
-    font-size: 18px;
+    font-size: 18px; 
   }
 }
+

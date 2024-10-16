@@ -1,0 +1,67 @@
+.container {
+  height: 100%;
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hubContainer {
+  height: 100%;
+
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8rem;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+ 
+  height: 90%;
+  width: 400px;
+  border-radius: 8px;
+  padding: 20px 10px;
+  cursor: pointer;
+  background-color: #2C3E50;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cardContainer:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cardContainer p {
+  font-size: 0.9rem;
+  color: white;
+}
+
+.cardContainer h2 {
+  font-size: 1.2rem;
+  color: whitesmoke;
+}
+
+
+@media (max-width: 768px) {
+  .hubContainer {
+    gap: 2rem; /* Reduce gap on smaller screens */
+   
+  }
+
+  .cardContainer {
+    width: 80%; /* Full width on smaller screens */
+  }
+}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import GeneralButton from "../UI/GeneralButton";
 import Logo from "../UI/Logo";
 import classes from "./Header.module.css";
@@ -8,7 +9,7 @@ function Header(props) {
     <header className={classes.header}>
       <div className={classes.container}>
         <FaBars className={classes.bars} onClick={props.onClick} />
-        <Logo />
+       <Link  className = {classes.link}to="/"><Logo /></Link> 
       </div>
       <div>
         <GeneralButton

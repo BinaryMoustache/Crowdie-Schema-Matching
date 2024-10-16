@@ -1,16 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
+import { checkAuthLoader } from "./utils/auth";
+
 import MainPage from "./pages/MainPage";
+import ErrorPage from "./pages/ErrorPage";
 import RootLayout from "./pages/Root";
 import CreateTasks from "./pages/MyTasksPage";
-import { checkAuthLoader } from "./utils/auth";
 import CompleteMicrotaskPage from "./pages/CompleteMicrotaskPage";
 import CrowdTasksPage from "./pages/CrowdTasksPage";
+import AuthenticationPage from "./pages/AuthenticationPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     loader: checkAuthLoader,
     children: [
       { path: "", element: <MainPage /> },
@@ -19,7 +22,7 @@ const router = createBrowserRouter([
       { path: "/crowdtasks/:taskId", element: <CompleteMicrotaskPage /> },
     ],
   },
-  { path: "/auth", element: <LoginPage /> },
+  { path: "/auth", element: <AuthenticationPage /> },
 ]);
 
 function App() {

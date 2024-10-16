@@ -12,11 +12,27 @@ const SideBar = forwardRef((props, ref) => {
     >
       <div className={classes.first_container}>
         <FaBars className={classes.bars} onClick={props.onClick} />
-        <Logo style={{ color: "white" }} />
+        <Logo style={{ color: "whitesmoke" }} />
       </div>
       <div className={classes.second_container}>
-        <NavLink to="mytasks">My Tasks</NavLink>
-        <NavLink to="crowdtasks">Crowd Tasks</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? classes.linkactive : undefined
+          }
+          to="mytasks"
+          onClick={props.onClick}
+        >
+          My Tasks
+        </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? classes.linkactive : undefined
+          }
+          to="crowdtasks"
+          onClick={props.onClick}
+        >
+          Crowd Tasks
+        </NavLink>
       </div>
     </div>
   );

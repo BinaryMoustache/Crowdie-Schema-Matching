@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "../UI/Card";
-import classes from "./CrowdTaskGrid.module.css";
 import { getAuthToken } from "../../utils/auth";
+
+import Card from "../UI/Card";
 import GeneralButton from "../UI/GeneralButton";
+import classes from "./CrowdTaskGrid.module.css";
 
 function CrowdTasksGrid() {
   const [tasks, setTasks] = useState([]);
@@ -32,8 +33,6 @@ function CrowdTasksGrid() {
 
         const data = await response.json();
         setTasks(data.tasks || []);
-        console.log(tasks);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       }

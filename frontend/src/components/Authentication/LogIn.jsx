@@ -11,7 +11,8 @@ function Login(props) {
 
   const navigate = useNavigate();
 
-  const handleSignIn = async () => {
+  const signInHandler = async (event) => {
+    event.preventDefault();
     setError(null);
     if (username.trim() === "" || password.trim() === "") {
       setError("Both username and password are required.");
@@ -40,45 +41,47 @@ function Login(props) {
     }
   };
 
-  const handleCreateAccount = () => {
-    props.onSignIn();
+  const createAccountHandler = () => {
+    props.onSignUp();
   };
 
   return (
     <div className={classes.container}>
-      <div className={classes.inputs}>
+      <form onSubmit={signInHandler}>
+        <div className={classes.inputs}>
           <InputText
-          id="user-text"
+            id="user-text"
             label="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
           />
-  
-        <InputText
-        id="user-pass"
+
+          <InputText
+            id="user-pass"
             label="password"
-            type= "password"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
           />
 
-        {error && <p className={classes.error_style}>{error}</p>}
-      </div>
+          {error && <p className={classes.error_style}>{error}</p>}
+        </div>
 
-      <div className={classes.actions}>
-        <button
-          type="button"
-          className={classes.textbutton}
-          onClick={handleCreateAccount}
-        >
-          Create a new account
-        </button>
-        <GeneralButton onClick={handleSignIn} className={classes.signinbutton}>
-          Sign In
-        </GeneralButton>
-      </div>
+        <div className={classes.actions}>
+          <button
+            type="button"
+            className={classes.textbutton}
+            onClick={createAccountHandler}
+          >
+            Create a new account
+          </button>
+          <GeneralButton type="sumbit" className={classes.signinbutton}>
+            Sign In
+          </GeneralButton>
+        </div>
+      </form>
     </div>
   );
 }

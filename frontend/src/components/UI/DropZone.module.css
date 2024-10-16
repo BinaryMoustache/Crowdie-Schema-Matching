@@ -17,19 +17,20 @@
 }
 
 .uploadLabel {
+  text-align: center;
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #34495E;
+  color: #2C3E50;
   margin-bottom: 10px;
 }
 
 .dropZone:hover {
   background-color: whitesmoke;
-  border-color: #3498db;
-  border: 2px solid #3498db;
+  border-color: #2980b9;
+  border: 2px solid #2980b9;
 }
 
 .icon {
@@ -50,7 +51,7 @@
   margin: 5px 0;
   padding: 5px 15px;
   border-radius: 5px;
-  background-color: whitesmoke;
+  background-color: rgb(221, 231, 239);
 
 }
 

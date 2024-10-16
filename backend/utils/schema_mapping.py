@@ -9,12 +9,9 @@ def infer_datetime_columns(df: pd.DataFrame) -> pd.DataFrame:
     date_keywords = ["date", "time", "year", "month", "day", "hour", "minute", "second"]
 
     for col in df.columns:
-        
         if any(keyword in col.lower() for keyword in date_keywords):
-
             try:
                 df[col] = pd.to_datetime(df[col], infer_datetime_format=True)
-
             except (ValueError, TypeError):
                 continue
 

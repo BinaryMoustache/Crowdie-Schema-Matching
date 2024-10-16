@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+
+.infoContainer {
+    padding: 20px;
+    height: 100%;
+    width: 30%;
+}
+
+.taskContainer {
+    height: 100%;
+    width: 70%;
+    padding: 20px;
+}
+
+.successMessage {
+
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 10rem;
+    color: #2C3E50;
+}
+
+
+.header {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+}
+
+.instructionsList {
+    margin-left: 1rem;
+    line-height: 1.6;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}

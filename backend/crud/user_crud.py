@@ -1,9 +1,8 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from models.db_model import User
-from schemas.user_schema import UserCreate
-from services.auth_services import get_password_hash
 from typing import Optional
+from schemas.user_schema import UserCreate
 
 
 async def get_user(
@@ -27,6 +26,7 @@ async def get_user(
 
 
 async def create_new_user(db: AsyncSession, user: UserCreate) -> User:
+    from services.auth_services import get_password_hash
     """
     Create a new user in the database.
     """

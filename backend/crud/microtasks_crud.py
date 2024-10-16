@@ -5,6 +5,7 @@ from schemas.microtask_schema import MicroTaskCreate
 from typing import List
 
 
+
 async def get_microtasks(db: AsyncSession, task_id: int) -> List[MicroTask]:
     """
     Retrieve all microtasks associated with a given task ID.
@@ -45,3 +46,12 @@ async def get_microtask_without_answer(
     result = await db.execute(query)
 
     return result.scalars().first()
+
+
+async def get_microtask_by_id(db: AsyncSession, microtask_id: int)->MicroTask:
+    """
+    Retrieve a microtask by its ID from the database.
+    """
+    query = select(MicroTask).where(MicroTask.id == microtask_id)
+    microtask = await db.execute(query)
+    return microtask.scalars().first()
