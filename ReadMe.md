@@ -14,9 +14,9 @@
 
 ## Technologies Used
 
-- **Frontend**: [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces. See the [Frontend README](frontend/README.md).
+- **Frontend**: [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces.
   
-- **Backend**: [FastAPI](https://fastapi.tiangolo.com/) - A high-performance web framework for building RESTful APIs. Refer to the [Backend README](backend/README.md).
+- **Backend**: [FastAPI](https://fastapi.tiangolo.com/) - A high-performance web framework for building RESTful APIs. 
 
 - **Database**: [SQLAlchemy](https://www.sqlalchemy.org/) with [PostgreSQL](https://www.postgresql.org/) for asynchronous data interactions.
 
