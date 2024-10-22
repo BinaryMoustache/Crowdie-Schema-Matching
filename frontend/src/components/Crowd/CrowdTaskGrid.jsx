@@ -47,7 +47,7 @@ function CrowdTasksGrid() {
       {tasks.length > 0 ? (
         <div className={classes.gridContainer}>
           {tasks.map((task) => (
-            <div key={task.task_id}>
+            <div key={task.id}>
               <Card className={classes.cardContainer}>
                 <div className={classes.child}>
                   <h3>Task Name: {task.name}</h3>
@@ -55,12 +55,12 @@ function CrowdTasksGrid() {
                 <div className={classes.child}>
                   <p>Description: {task.description}</p>
                 </div>
-                <p>Created by: {task.username}</p>
+                <p>Created by: <b>{task.username}</b></p>
                 <div className={classes.actions}>
                   <GeneralButton
                     className={classes.claimButton}
                     onClick={() => {
-                      navigate(`/crowdtasks/${task.task_id}`);
+                      navigate(`/crowdtasks/${task.id}`);
                     }}
                   >
                     Claim Task

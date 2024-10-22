@@ -12,12 +12,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 from dependencies import get_db
 from models.db_model import User
-from schemas.task_schema import CrowdTaskResponse
+from schemas.task_schema import CrowdTaskResponse, TaskResponse
 from schemas.task_table_schema import TaskTableCreate
 from services.auth_services import get_current_user
-from crud.task_crud import create_task, get_tasks, get_task_by_id
+from crud.task_crud import create_task, get_tasks, get_task_by_id, get_crowd_tasks
 from crud.task_table_crud import create_task_table
-from crud.microtasks_crud import get_microtask_without_answer, get_microtask_by_id
+from crud.microtasks_crud import get_microtask_without_answer, get_microtask_by_id, get_microtasks
 from services.tasks_service import process_tables
 from crud.user_crud import get_user
 from utils.utils import create_temp_dir
@@ -90,9 +90,8 @@ async def create_new_task(
             request,
         )
 
-        return {
-            "message": "Task created successfully",
-        }
+        return {"message": "Task created successfully"}
+
     except HTTPException as http_exc:
         raise http_exc
 
@@ -120,29 +119,19 @@ async def get_other_tasks(
     db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)
 ):
     try:
-        tasks = await get_tasks(db, current_user.id, exclude=True)
-        if not tasks:
-            return tasks
+        task_data  = await get_crowd_tasks(db, current_user.id)
 
-        task_data = []
-        for task in tasks:
-            microtask = await get_microtask_without_answer(db, task.id, current_user.id)
+        tasks = [
+        TaskResponse(
+            id=task[0],
+            name=task[1],
+            description=task[2],
+            username=task[3]
+        )
+        for task in task_data
+    ]
 
-            if not microtask:
-                continue
-
-            user = await get_user(db, user_id=task.user_id)
-            if user:
-                task_data.append(
-                    {
-                        "task_id": task.id,
-                        "name": task.name,
-                        "description": task.description,
-                        "username": user.username,
-                    }
-                )
-
-        response = CrowdTaskResponse(tasks=task_data)
+        response = CrowdTaskResponse(tasks=tasks)
         return response
 
     except Exception as e:
@@ -185,9 +174,6 @@ async def get_microtask(
         microtask = await get_microtask_without_answer(db, task.id, current_user.id)
 
         if not microtask:
-            task.status = "completed"
-            db.add(task)
-            await db.commit()
             return None
 
         return {
@@ -233,6 +219,14 @@ async def submit_microtask_answer(
 
         if (microtask.yes_count + microtask.no_count) >= microtask.required_answers:
             microtask.is_completed = True
+            await db.commit() 
+
+            microtasks = await get_microtasks(db, microtask.task_id)
+            if all(m.is_completed for m in microtasks):
+                task = await get_task_by_id(db, microtask.task_id)
+                task.status = "completed"
+                db.add(task)
+                await db.commit()
 
         await db.commit()
 
@@ -240,6 +234,7 @@ async def submit_microtask_answer(
 
     except HTTPException as http_exc:
         raise http_exc
+
     except Exception as e:
         logger.error(f"Failed to submit microtask answer: {e}")
         await db.rollback()

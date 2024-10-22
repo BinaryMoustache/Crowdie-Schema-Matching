@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.future import select
-from models.db_model import Task
+from sqlalchemy import select
+from models.db_model import Task, MicroTask, MicroTaskAnswers, User
 from schemas.task_schema import TaskCreate
 from datetime import datetime, timezone
 from typing import Optional, List, Union
@@ -38,9 +38,8 @@ async def get_tasks(
         query = query.where(Task.user_id == user_id)
 
     result = await db.execute(query)
-    tasks = result.scalars().all()
 
-    return tasks
+    return result.scalars().all()
 
 
 async def get_task_by_id(db: AsyncSession, task_id: int) -> Optional[Task]:
@@ -54,3 +53,30 @@ async def get_task_by_id(db: AsyncSession, task_id: int) -> Optional[Task]:
     task = result.scalars().first()
 
     return task
+
+
+async def get_crowd_tasks(db: AsyncSession, current_user_id: int):
+    """
+    Retrieve tasks that do not belong to the current user and the user has not provided answers.
+    """
+    query = (
+        select(Task.id, Task.name, Task.description, User.username)
+        .join(User, Task.user_id == User.id)
+        .where(
+            Task.user_id != current_user_id,
+            Task.id.in_(
+                select(MicroTask.task_id).where(
+                    MicroTask.is_completed == False,
+                    ~MicroTask.id.in_(
+                        select(MicroTaskAnswers.microtask_id).where(
+                            MicroTaskAnswers.user_id == current_user_id
+                        )
+                    ),
+                )
+            ),
+        )
+    )
+
+    result = await db.execute(query)
+
+    return result.all()

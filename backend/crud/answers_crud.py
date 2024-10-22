@@ -14,6 +14,6 @@ async def get_current_user_answer(db: AsyncSession, microtask_id: int, user_id:i
     )
     if query:
         return query
-    answer_result = await db.execute(query)
+    result = await db.execute(query)
 
-    return answer_result.scalars().first()
+    return result.scalars().first()

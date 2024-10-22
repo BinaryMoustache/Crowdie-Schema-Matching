@@ -1,4 +1,5 @@
 fastapi[all]
+gunicorn
 pandas
 torch
 sentence-transformers

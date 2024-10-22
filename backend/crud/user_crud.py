@@ -20,13 +20,13 @@ async def get_user(
         raise ValueError("Either user_id or username must be provided")
 
     result = await db.execute(query)
-    user = result.scalar_one_or_none()
 
-    return user
+    return result.scalar_one_or_none()
 
 
 async def create_new_user(db: AsyncSession, user: UserCreate) -> User:
     from services.auth_services import get_password_hash
+
     """
     Create a new user in the database.
     """

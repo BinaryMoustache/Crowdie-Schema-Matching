@@ -5,7 +5,7 @@ from typing import Optional
 class UserCreate(BaseModel):
     username: str
     password: str
-    cs_background: str
+    cs_background: bool
     study_level: Optional[str] = None
     experience: Optional[str] = None
 

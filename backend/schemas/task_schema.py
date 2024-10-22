@@ -11,10 +11,11 @@ class TaskCreate(BaseModel):
 
 
 class TaskResponse(BaseModel):
-    task_id: int
+    id: int
     name: str
     description: Optional[str]
     username: str
+
 
 class CrowdTaskResponse(BaseModel):
     tasks: List[TaskResponse]

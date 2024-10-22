@@ -4,6 +4,7 @@ import { GoPlus, GoTrash, GoChevronUp, GoChevronDown } from "react-icons/go";
 
 import Card from "../UI/Card";
 import UtilButton from "../UI/UtilButton";
+import GeneralButton from "../UI/GeneralButton"
 import classes from "./MyTasksList.module.css";
 
 
@@ -133,6 +134,7 @@ function MyTasksList(props) {
                   </div>
                   {expandedTaskId === task.id && (
                     <div className={classes.taskDetails}>
+                      <div>
                       <p>
                         <strong>Description:</strong>{" "}
                         {task.description || "No description available"}
@@ -153,6 +155,8 @@ function MyTasksList(props) {
                         <strong>Date Created:</strong>{" "}
                         {task.created_at.split("T")[0] || "N/A"}
                       </p>
+                      </div>
+                   {task.status === "completed" && <GeneralButton>Download</GeneralButton>}
                     </div>
                   )}
                 </li>

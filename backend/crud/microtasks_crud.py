@@ -5,16 +5,15 @@ from schemas.microtask_schema import MicroTaskCreate
 from typing import List
 
 
-
 async def get_microtasks(db: AsyncSession, task_id: int) -> List[MicroTask]:
     """
     Retrieve all microtasks associated with a given task ID.
     """
 
     query = select(MicroTask).where(MicroTask.task_id == task_id)
-    microtasks_result = await db.execute(query)
+    result = await db.execute(query)
 
-    return microtasks_result.scalars().all()
+    return result.scalars().all()
 
 
 async def create_microtask(microtask: MicroTaskCreate):
@@ -48,10 +47,10 @@ async def get_microtask_without_answer(
     return result.scalars().first()
 
 
-async def get_microtask_by_id(db: AsyncSession, microtask_id: int)->MicroTask:
+async def get_microtask_by_id(db: AsyncSession, microtask_id: int) -> MicroTask:
     """
     Retrieve a microtask by its ID from the database.
     """
     query = select(MicroTask).where(MicroTask.id == microtask_id)
-    microtask = await db.execute(query)
-    return microtask.scalars().first()
+    result = await db.execute(query)
+    return result.scalars().first()

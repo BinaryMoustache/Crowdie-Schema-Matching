@@ -19,7 +19,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True, index=True)
     password = Column(String, nullable=False)
-    cs_background = Column(String, nullable=False)
+    cs_background = Column(Boolean, nullable=False)
     study_level = Column(String, nullable=True)
     experience = Column(String, nullable=True)
 

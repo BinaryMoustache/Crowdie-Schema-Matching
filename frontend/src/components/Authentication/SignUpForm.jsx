@@ -10,7 +10,7 @@ function SignIn(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
-  const [hasCsBackground, setHasCsBackground] = useState("");
+  const [hasCsBackground, setHasCsBackground] = useState(false);
   const [studyLevel, setStudyLevel] = useState("");
   const [experience, setExperience] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
@@ -126,8 +126,8 @@ function SignIn(props) {
             }}
             required={true}
             options={[
-              { label: "Yes", value: "yes" },
-              { label: "No", value: "no" },
+              { label: "Yes", value: true },
+              { label: "No", value: false },
             ]}
           />
           {hasCsBackground == "yes" && (

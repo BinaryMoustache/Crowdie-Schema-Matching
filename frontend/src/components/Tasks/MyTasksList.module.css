@@ -104,11 +104,15 @@ hr {
 }
 
 .taskDetails {
+    width: 100%;
     padding: 10px;
     border-left: 3px solid #ccc;
     margin-top: 5px;
     margin-bottom: 5px;
     font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .taskDetails p {
