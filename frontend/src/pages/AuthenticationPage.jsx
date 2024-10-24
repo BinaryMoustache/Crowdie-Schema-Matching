@@ -3,7 +3,6 @@ import { useState } from "react";
 import SignIn from "../components/Authentication/SignUpForm";
 import Info from "../components/Authentication/Info";
 
-
 function AuthenticationPage() {
   const [signInIsShown, setsignInIsShown] = useState(false);
 
@@ -14,9 +13,9 @@ function AuthenticationPage() {
     setsignInIsShown(false);
   };
   return (
-    <div >
+    <div>
       <Info onSignUp={showSignInHandler} />
-   
+
       {signInIsShown && <SignIn onClose={hideSignInHandler} />}
     </div>
   );

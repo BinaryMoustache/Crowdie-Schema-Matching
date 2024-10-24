@@ -1,61 +1,122 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import classes from "./SignUpForm.module.css";
+import { env } from "../../utils/env";
+
 import Modal from "../UI/Modal";
 import GeneralButton from "../UI/GeneralButton";
 import InputText from "../UI/InputText";
 import InputSelect from "../UI/InputSelect";
+import classes from "./SignUpForm.module.css";
+
+const formReducer = (state, action) => {
+  switch (action.type) {
+    case "SET_FIELD":
+      return { ...state, [action.field]: action.value };
+    case "SET_PASSWORDS_MATCH":
+      return { ...state, passwordsMatch: action.value };
+    case "SET_PASSWORD_ERROR":
+      return { ...state, passwordError: action.value };
+    case "SET_USERNAME_ERROR":
+      return { ...state, usernameError: action.value };
+    case "RESET_CS_FIELDS":
+      return { ...state, studyLevel: "", experience: "" }; 
+    default:
+      return state;
+  }
+};
 
 function SignIn(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [retypePassword, setRetypePassword] = useState("");
-  const [hasCsBackground, setHasCsBackground] = useState(false);
-  const [studyLevel, setStudyLevel] = useState("");
-  const [experience, setExperience] = useState("");
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const [usernameError, setUsernameError] = useState(null);
-
-  const retypePasswordChangeHandler = (e) => {
-    setRetypePassword(e.target.value);
-    setPasswordsMatch(e.target.value === password);
-  };
+  const [formState, dispatch] = useReducer(formReducer, {
+    username: "",
+    password: "",
+    retypePassword: "",
+    hasCsBackground: false,
+    studyLevel: "",
+    experience: "",
+    passwordsMatch: true,
+    passwordError: null,
+    usernameError: null,
+  });
 
   const navigate = useNavigate();
+
+  const validatePassword = (password) => {
+    const hasMinLength = password.length >= 8;
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (!hasMinLength) {
+      return "Password must be at least 8 characters long.";
+    }
+    if (!hasNumber) {
+      return "Password must contain at least one digit.";
+    }
+    if (!hasSpecialChar) {
+      return "Password must contain at least one special character.";
+    }
+    return null;
+  };
+
+  const handleFieldChange = (field, value) => {
+    dispatch({ type: "SET_FIELD", field, value });
+
+    if (field === "password") {
+      const passwordError = validatePassword(value);
+      dispatch({ type: "SET_PASSWORD_ERROR", value: passwordError });
+    }
+
+    if (field === "retypePassword") {
+      dispatch({
+        type: "SET_PASSWORDS_MATCH",
+        value: value === formState.password,
+      });
+    }
+
+    if (field === "hasCsBackground" && value === false) {
+      dispatch({ type: "RESET_CS_FIELDS" });
+    }
+  };
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
 
-    if (password !== retypePassword) {
-      setPasswordsMatch(false);
+    const passwordValidationError = validatePassword(formState.password);
+    if (passwordValidationError) {
+      dispatch({ type: "SET_PASSWORD_ERROR", value: passwordValidationError });
+      return;
+    }
+
+    if (formState.password !== formState.retypePassword) {
+      dispatch({ type: "SET_PASSWORDS_MATCH", value: false });
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:8000/users/signup/", {
+      const response = await fetch(`${env.BACKEND_URL}/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: username,
-          password: password,
-          cs_background: hasCsBackground,
-          study_level: hasCsBackground === "yes" ? studyLevel : "",
-          experience: hasCsBackground === "yes" ? experience : "",
+          username: formState.username,
+          password: formState.password,
+          cs_background: formState.hasCsBackground,
+          study_level: formState.hasCsBackground ? formState.studyLevel : "",
+          experience: formState.hasCsBackground ? formState.experience : "",
         }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.log(errorData);
         if (errorData.detail === "Username already exists.") {
-          setUsernameError("Username already exists. Please choose another.");
-          console.log(usernameError);
+          dispatch({
+            type: "SET_USERNAME_ERROR",
+            value: "Username already exists. Please choose another.",
+          });
         } else {
           alert(
-            "Failed to create user: " + errorData.detail ||
-              "An unexpected error occurred."
+            "Failed to create user: " +
+              (errorData.detail || "An unexpected error occurred.")
           );
         }
         return;
@@ -65,12 +126,12 @@ function SignIn(props) {
       const token = data.access_token;
 
       localStorage.setItem("token", token);
-
       navigate("/");
     } catch (error) {
       alert("An error occurred during signup. Please try again later.");
     }
   };
+
   return (
     <Modal open={true}>
       <div className={classes.container}>
@@ -80,65 +141,65 @@ function SignIn(props) {
             <InputText
               id="user"
               label="username"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
+              value={formState.username}
+              onChange={(e) => handleFieldChange("username", e.target.value)}
               placeholder="Enter username"
               required={true}
             />
-            {usernameError && (
-              <p className={classes.error_text}>{usernameError}</p>
+            {formState.usernameError && (
+              <p className={classes.error_text}>{formState.usernameError}</p>
             )}
           </div>
           <InputText
             id="pass"
             type="password"
             label="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            value={formState.password}
+            onChange={(e) => handleFieldChange("password", e.target.value)}
             placeholder="Enter password"
             required={true}
           />
+          {formState.passwordError && (
+            <p className={classes.error_text}>{formState.passwordError}</p>
+          )}
           <div>
             <InputText
               id="re-pass"
               type="password"
               label="re-type password"
-              value={retypePassword}
-              onChange={retypePasswordChangeHandler}
+              value={formState.retypePassword}
+              onChange={(e) =>
+                handleFieldChange("retypePassword", e.target.value)
+              }
               placeholder="Re-type password"
               required={true}
             />
-
-            {!passwordsMatch && (
+            {!formState.passwordsMatch && (
               <p className={classes.error_text}>Passwords do not match.</p>
             )}
           </div>
           <InputSelect
             id="cs-back"
             label="Do you have a background in Computer Science?"
-            value={hasCsBackground}
-            onChange={(e) => {
-              setHasCsBackground(e.target.value);
-            }}
+            value={formState.hasCsBackground}
+            onChange={(e) =>
+              handleFieldChange("hasCsBackground", e.target.value === "true")
+            }
             required={true}
             options={[
               { label: "Yes", value: true },
               { label: "No", value: false },
             ]}
           />
-          {hasCsBackground == "yes" && (
+          {formState.hasCsBackground && (
             <>
               <InputSelect
                 id="study-level"
                 label="level of study"
-                value={studyLevel}
-                onChange={(e) => {
-                  setStudyLevel(e.target.value);
-                }}
+                value={formState.studyLevel}
+                onChange={(e) =>
+                  handleFieldChange("studyLevel", e.target.value)
+                }
                 options={[
                   { label: "Bachelor", value: "bsc" },
                   { label: "Master", value: "msc" },
@@ -147,11 +208,11 @@ function SignIn(props) {
               />
               <InputSelect
                 id="years-exp"
-                label="years of experience of"
-                value={experience}
-                onChange={(e) => {
-                  setExperience(e.target.value);
-                }}
+                label="years of experience"
+                value={formState.experience}
+                onChange={(e) =>
+                  handleFieldChange("experience", e.target.value)
+                }
                 options={[
                   { label: "0-2 years", value: "0-2" },
                   { label: "3-5 years", value: "3-5" },

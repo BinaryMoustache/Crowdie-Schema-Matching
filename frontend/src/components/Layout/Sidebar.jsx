@@ -1,8 +1,9 @@
-import { FaBars } from "react-icons/fa";
-import Logo from "../UI/Logo";
-import classes from "./Sidebar.module.css";
 import { NavLink } from "react-router-dom";
 import { forwardRef } from "react";
+import { FaBars } from "react-icons/fa";
+
+import Logo from "../UI/Logo";
+import classes from "./Sidebar.module.css";
 
 const SideBar = forwardRef((props, ref) => {
   return (

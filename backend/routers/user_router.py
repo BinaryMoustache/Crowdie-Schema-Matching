@@ -4,10 +4,10 @@ from dependencies import get_db
 from schemas.user_schema import UserCreate, UserLogin
 from services.auth_services import create_access_token, verify_password
 from crud.user_crud import get_user, create_new_user
+import logging
 
-
+logger = logging.getLogger(__name__)
 router = APIRouter()
-
 
 @router.post("/signup/")
 async def create_user(user: UserCreate, db: AsyncSession = Depends(get_db)):

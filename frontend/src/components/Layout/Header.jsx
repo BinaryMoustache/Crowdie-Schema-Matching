@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
+
 import GeneralButton from "../UI/GeneralButton";
 import Logo from "../UI/Logo";
 import classes from "./Header.module.css";
-import { FaBars } from "react-icons/fa";
+
 
 function Header(props) {
   return (

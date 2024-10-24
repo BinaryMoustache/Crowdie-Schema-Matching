@@ -1,8 +1,7 @@
 import CompleteMicrotask from "../components/Crowd/CompleteMicrotask";
 
 function CompleteMicrotaskPage() {
-  
-return<CompleteMicrotask/>
+  return <CompleteMicrotask />;
 }
 
 export default CompleteMicrotaskPage;

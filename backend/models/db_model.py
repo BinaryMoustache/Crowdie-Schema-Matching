@@ -17,7 +17,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
     cs_background = Column(Boolean, nullable=False)
     study_level = Column(String, nullable=True)
@@ -36,7 +36,7 @@ class Task(Base):
     description = Column(String, nullable=True)
     threshold = Column(Float, nullable=False)
     status = Column(String, default="pending", nullable=False)
-    num_of_tables = Column(String, nullable=False)
+    num_of_tables = Column(Integer, nullable=False)
     num_microtasks = Column(Integer, default=0, nullable=True)
     created_at = Column(DateTime, default=func.now(), nullable=False)
     is_experience_required = Column(Boolean, default=False, nullable=False)

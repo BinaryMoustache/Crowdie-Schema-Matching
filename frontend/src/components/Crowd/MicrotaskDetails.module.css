@@ -119,10 +119,6 @@ tbody tr:nth-child(even) {
     font-size: 0.9rem;
 }
 
-
-
-
-
 @media (max-width: 768px) {
     .dataContainer {
         flex-direction: column; 

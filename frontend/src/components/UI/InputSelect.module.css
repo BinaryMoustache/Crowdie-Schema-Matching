@@ -19,15 +19,13 @@
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
         0 1px 2px 0 rgba(0, 0, 0, 0.06);
     transition: border-color 0.2s ease-in-out;
-   
     cursor: pointer; 
-
-    background-position: right 1rem center; /* Position the arrow */
-    background-size: 0.8rem; /* Size of the arrow */
+    background-position: right 1rem center;
+    background-size: 0.8rem; 
 }
 
 .container select:focus {
     outline: none;
-    border-color: #2980b9; /* Focus border color */
+    border-color: #2980b9; 
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }

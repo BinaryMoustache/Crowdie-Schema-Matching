@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { env } from "../../utils/env";
+
 import GeneralButton from "../UI/GeneralButton";
 import InputText from "../UI/InputText";
 import classes from "./Login.module.css";
@@ -19,7 +21,7 @@ function Login(props) {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/users/login/", {
+      const response = await fetch(`${env.BACKEND_URL}/users/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAuthToken } from "../../utils/auth";
+import { env } from "../../utils/env";
 
 import MyTasksList from "./MyTasksList";
 import CreateTaskForm from "./CreateTaskForm";
@@ -18,7 +19,7 @@ function MyTasks() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/tasks/tasks/", {
+      const response = await fetch(`${env.BACKEND_URL}/tasks/tasks/`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

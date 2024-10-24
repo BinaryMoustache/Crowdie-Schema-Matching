@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import { GoSidebarCollapse } from "react-icons/go";
 import { getAuthToken } from "../../utils/auth";
+import { env } from "../../utils/env";
 
 import InputText from "../UI/InputText";
 import InputSelect from "../UI/InputSelect";
@@ -283,7 +284,7 @@ function CreateTaskForm({ isVisible, onClose }) {
     console.log(taskFormData)
     
     try {
-      const response = await fetch("http://localhost:8000/tasks/create/", {
+      const response = await fetch(`${env.BACKEND_URL}/tasks/create/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

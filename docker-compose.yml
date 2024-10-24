@@ -1,4 +1,3 @@
-version: '3'
 services:
   frontend:
     build:
@@ -9,6 +8,32 @@ services:
     networks:
       - app-network
 
+  backend:
+    build:
+      context: ./backend  
+      dockerfile: Dockerfile 
+    container_name: backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=production 
+      - DATABASE_URL=postgresql+asyncpg://postgres:password@db:5432/mydatabase
+    networks:
+      - app-network
+    depends_on:
+      - db  
+
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
 
 networks:
   app-network:

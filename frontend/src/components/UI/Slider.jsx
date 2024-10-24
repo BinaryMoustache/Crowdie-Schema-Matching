@@ -17,8 +17,8 @@ const Slider = ({ value, onChange }) => {
         min="3"
         max="9"
         step="2"
-        value={value} // Controlled by parent
-        onChange={(e) => onChange(Number(e.target.value))} // Notify parent on change
+        value={value} 
+        onChange={(e) => onChange(Number(e.target.value))} 
         className={classes.slider}
       />
       <div className={classes.valueDisplay}>

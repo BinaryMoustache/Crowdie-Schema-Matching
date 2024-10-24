@@ -1,12 +1,12 @@
-import { useState} from "react";
+import { useState } from "react";
 import { getAuthToken } from "../../utils/auth";
+import { env } from "../../utils/env";
 import { GoPlus, GoTrash, GoChevronUp, GoChevronDown } from "react-icons/go";
 
 import Card from "../UI/Card";
 import UtilButton from "../UI/UtilButton";
-import GeneralButton from "../UI/GeneralButton"
+import GeneralButton from "../UI/GeneralButton";
 import classes from "./MyTasksList.module.css";
-
 
 function MyTasksList(props) {
   const tasks = props.tasks || [];
@@ -34,7 +34,6 @@ function MyTasksList(props) {
 
   const deleteTasksHandler = async () => {
     const token = getAuthToken();
-    console.log(token);
     if (!token) {
       alert("You need to be logged in to delete tasks.");
       return;
@@ -44,7 +43,7 @@ function MyTasksList(props) {
       await Promise.all(
         selectedTasks.map(async (taskId) => {
           const response = await fetch(
-            `http://localhost:8000/tasks/delete/${taskId}`,
+            `${env.BACKEND_URL}/tasks/delete/${taskId}`,
             {
               method: "DELETE",
               headers: {
@@ -66,7 +65,6 @@ function MyTasksList(props) {
       setSelectedTasks([]);
       setDisabledButton(true);
     } catch (error) {
-      console.error("Failed to delete tasks", error);
       setError("An error occurred while deleting tasks.");
     }
   };
@@ -113,13 +111,17 @@ function MyTasksList(props) {
                       </p>
                     </div>
                     <div className={classes.taskStatus}>
-                     
-                    <p><strong>Status:</strong>  </p>
-                        <span className={classes.status}style={{ color: statusColors[task.status] }}>
-                          {" "}
-                          {task.status || "Unknown"}
-                        </span>
-                    
+                      <p>
+                        <strong>Status:</strong>{" "}
+                      </p>
+                      <span
+                        className={classes.status}
+                        style={{ color: statusColors[task.status] }}
+                      >
+                        {" "}
+                        {task.status || "Unknown"}
+                      </span>
+
                       <span
                         className={classes.expandIcon}
                         onClick={() => toggleExpandHandler(task.id)}
@@ -135,28 +137,30 @@ function MyTasksList(props) {
                   {expandedTaskId === task.id && (
                     <div className={classes.taskDetails}>
                       <div>
-                      <p>
-                        <strong>Description:</strong>{" "}
-                        {task.description || "No description available"}
-                      </p>
-                      <p>
-                        <strong>Number of Tables:</strong>{" "}
-                        {task.num_of_tables || "N/A"}
-                      </p>
-                      <p>
-                        <strong>Similarity Threshold:</strong>{" "}
-                        {task.threshold || 0.0}
-                      </p>
-                      <p>
-                        <strong>Number of Microtasks:</strong>{" "}
-                        {task.num_microtasks || "N/A"}
-                      </p>
-                      <p>
-                        <strong>Date Created:</strong>{" "}
-                        {task.created_at.split("T")[0] || "N/A"}
-                      </p>
+                        <p>
+                          <strong>Description:</strong>{" "}
+                          {task.description || "No description available"}
+                        </p>
+                        <p>
+                          <strong>Number of Tables:</strong>{" "}
+                          {task.num_of_tables || "N/A"}
+                        </p>
+                        <p>
+                          <strong>Similarity Threshold:</strong>{" "}
+                          {task.threshold || 0.0}
+                        </p>
+                        <p>
+                          <strong>Number of Microtasks:</strong>{" "}
+                          {task.num_microtasks || "N/A"}
+                        </p>
+                        <p>
+                          <strong>Date Created:</strong>{" "}
+                          {task.created_at.split("T")[0] || "N/A"}
+                        </p>
                       </div>
-                   {task.status === "completed" && <GeneralButton>Download</GeneralButton>}
+                      {task.status === "completed" && (
+                        <GeneralButton>Download</GeneralButton>
+                      )}
                     </div>
                   )}
                 </li>

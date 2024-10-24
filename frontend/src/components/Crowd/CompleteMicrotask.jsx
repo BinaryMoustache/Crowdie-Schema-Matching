@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAuthToken } from "../../utils/auth";
+import {env} from "../../utils/env"
 
 import MicrotaskDetails from "./MicrotaskDetails";
 import classes from "./CompleteMicrotask.module.css";
@@ -22,9 +23,8 @@ function CompleteMicrotask() {
     const token = getAuthToken();
 
     try {
-      console.log(`Fetching microtask for task ID: ${taskId}`);
       const response = await fetch(
-        `http://localhost:8000/tasks/microtask/${taskId}/`,
+        `${env.BACKEND_URL}/tasks/microtask/${taskId}/`,
         {
           method: "GET",
           headers: {
@@ -54,15 +54,12 @@ function CompleteMicrotask() {
   const responseSubmitHandler = async (responseValue) => {
     const endTime = Date.now();
     const timeTaken = (endTime - startTime) / 1000;
-    console.log(`Time taken: ${timeTaken} seconds`);
-    console.log(responseValue);
     setError(null);
     const token = getAuthToken();
 
     try {
-      console.log(`Submitting response for task ID: ${taskId}`);
       const response = await fetch(
-        `http://localhost:8000/tasks/microtask_answer/`,
+        `${env.BACKEND_URL}/tasks/microtask_answer/`,
         {
           method: "POST",
           headers: {

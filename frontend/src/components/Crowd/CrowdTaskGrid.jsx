@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuthToken } from "../../utils/auth";
+import {env} from "../../utils/env"
 
 import Card from "../UI/Card";
 import GeneralButton from "../UI/GeneralButton";
@@ -17,7 +18,7 @@ function CrowdTasksGrid() {
 
       try {
         const response = await fetch(
-          "http://localhost:8000/tasks/crowd_tasks/",
+          `${env.BACKEND_URL}/tasks/crowd_tasks/`,
           {
             method: "GET",
             headers: {

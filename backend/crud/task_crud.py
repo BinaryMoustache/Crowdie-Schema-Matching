@@ -2,7 +2,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from models.db_model import Task, MicroTask, MicroTaskAnswers, User
 from schemas.task_schema import TaskCreate
-from datetime import datetime, timezone
 from typing import Optional, List, Union
 
 
@@ -11,7 +10,7 @@ async def create_task(db: AsyncSession, task: TaskCreate, user_id: int) -> Task:
     Create a new task for the specified user and commit it to the database.
     """
 
-    new_task = Task(user_id=user_id, **task, created_at=datetime.now(timezone.utc))
+    new_task = Task(user_id=user_id, **task)
 
     db.add(new_task)
     await db.commit()

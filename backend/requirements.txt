@@ -1,6 +1,10 @@
 fastapi[all]
 gunicorn
 pandas
-torch
 sentence-transformers
 aiofiles
+sqlalchemy[asyncio]
+passlib[bcrypt] 
+pyjwt
+asyncpg
+alembic
