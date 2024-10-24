@@ -121,8 +121,8 @@ To check Crowdie locally follow the steps below.
 
 ### Development
 If you want to experiment with the code, check the respective README files for instructions on running the application in development settings:
-- [Backend README](/backend/ReadMe.md)
-- [Frontend README](/frontend/ReadMe.md)
+- [Backend README](/backend/README.md)
+- [Frontend README](/frontend/README.md)
 
 ## Future Plans
 
